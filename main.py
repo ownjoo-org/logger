@@ -1,5 +1,5 @@
-import logging
-import logging.config
+from logging import Filter, getLogger
+from logging.config import dictConfig
 from pathlib import Path
 from yaml import safe_load
 
@@ -14,16 +14,16 @@ def configure_logging() -> None:
             continue
         log_file = Path(file_path)
         log_file.parent.mkdir(exist_ok=True, parents=True)
-    logging.config.dictConfig(log_cfg)
-    logger = logging.getLogger(__name__)
+    dictConfig(log_cfg)
+    logger = getLogger(__name__)
     logger.info(f'logging initialized')
 
 
 def main():
     configure_logging()
     log_name: str = 'vehicle'
-    logger = logging.getLogger(log_name)
-    veh_filter: logging.Filter = logging.Filter(log_name)
+    logger = getLogger(log_name)
+    veh_filter: Filter = Filter(log_name)
     logger.addFilter(veh_filter)
     logger.info(f'should appear in vehicle.log only')
 
