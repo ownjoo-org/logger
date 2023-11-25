@@ -19,7 +19,7 @@ def configure_logging() -> None:
     logger.info(f'logging initialized')
 
 
-def main():
+def main() -> None:
     configure_logging()
     log_name: str = 'vehicle'
     logger: Logger = getLogger(log_name)
